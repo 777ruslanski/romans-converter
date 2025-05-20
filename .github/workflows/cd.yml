@@ -17,11 +17,15 @@ jobs:
           node-version: '16'
       
       - name: Install dependencies
-        run: npm install mocha chai http-server wait-on
+        run: |
+          npm install -g http-server
+          npm install mocha chai wait-on
       
       - name: Run tests
         run: |
-          http-server -p 8080 . &
+          http-server -p 8080 . > /dev/null 2>&1 &
+          sleep 5
+          curl http://localhost:8080/test.html
           npx wait-on http://localhost:8080/test.html
       
       - name: Lint code
