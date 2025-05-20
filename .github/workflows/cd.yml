@@ -21,6 +21,9 @@ jobs:
           npm install -g http-server
           npm install eslint@8.56.0 eslint-config-airbnb-base@15 eslint-plugin-import@2.29.1 mocha chai wait-on --save-dev
 
+      - name: Fix ESLint permissions
+        run: chmod +x ./node_modules/.bin/eslint
+
       - name: Run tests
         run: |
           http-server -p 8080 . > /dev/null 2>&1 &
